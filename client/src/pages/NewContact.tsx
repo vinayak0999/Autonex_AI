@@ -563,17 +563,17 @@ export default function NewContact() {
             <div className="relative w-full min-h-[50vh] flex items-center justify-center overflow-hidden mt-32">
               <div className="absolute inset-0"
                 style={{
-                  background: "linear-gradient(180deg, transparent 0%, hsl(var(--background)/0.1) 15%, hsl(var(--card)/0.2) 30%, hsl(25, 85%, 55%, 0.15) 50%, hsl(25, 85%, 55%, 0.3) 75%, hsl(25, 85%, 55%, 0.5) 100%)"
+                  background: "linear-gradient(180deg, transparent 0%, hsl(var(--background)/0.1) 15%, hsl(var(--card)/0.2) 30%, hsl(220, 73%, 33%, 0.15) 50%, hsl(220, 73%, 33%, 0.3) 75%, hsl(220, 73%, 33%, 0.5) 100%)"
                 }}
               />
               <div className="pointer-events-none absolute inset-0"
                 style={{
-                  background: "linear-gradient(45deg, transparent 0%, hsl(25, 85%, 55%, 0.05) 50%, transparent 100%)",
+                  background: "linear-gradient(45deg, transparent 0%, hsl(220, 73%, 33%, 0.05) 50%, transparent 100%)",
                   maskImage: "linear-gradient(to bottom, transparent 0%, black 20%, black 100%)"
                 }}
               />
               <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-hsl(var(--background)) to-transparent" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-[radial-gradient(60%_100%_at_50%_100%,hsl(25, 85%, 55%, 0.15),transparent_70%)]" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-[radial-gradient(60%_100%_at_50%_100%,hsl(220, 73%, 33%, 0.15),transparent_70%)]" />
 
               <motion.div
                 className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white"

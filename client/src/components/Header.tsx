@@ -77,7 +77,7 @@ export default function Header() {
 
           {/* panel */}
           <div className="pointer-events-none absolute top-0 right-0 w-[85vw] max-w-[520px] aspect-square overflow-hidden rounded-bl-[100%]">
-            <div className="pointer-events-auto absolute inset-0 bg-transparent backdrop-blur-lg text-white shadow-2xl translate-x-full animate-[menuSlideIn_.35s_ease-out_forwards] flex flex-col" style={{ border: '1px solid hsl(25, 85%, 55%, 0.3)' }}>
+            <div className="pointer-events-auto absolute inset-0 bg-transparent backdrop-blur-lg text-white shadow-2xl translate-x-full animate-[menuSlideIn_.35s_ease-out_forwards] flex flex-col" style={{ border: '1px solid hsl(220, 73%, 33%, 0.3)' }}>
               <div className="p-3 self-end">
                 <Button variant="ghost" size="icon" aria-label="Close menu" onClick={() => setMenuOpen(false)}>
                   <X className="h-5 w-5" />

@@ -41,7 +41,7 @@
   --popover: 24 22% 9%;
   --popover-foreground: 0 0% 96%;
   --popover-border: 24 15% 18%;
-  --primary: 28 92% 56%;
+  --primary: 220 73% 33%;
   --primary-foreground: 0 0% 100%;
   --secondary: 24 20% 16%;
   --secondary-foreground: 0 0% 92%;
@@ -52,9 +52,9 @@
   --destructive: 0 85% 60%;
   --destructive-foreground: 0 100% 95%;
   --input: 24 18% 22%;
-  --ring: 28 92% 56%;
+  --ring: 220 73% 33%;
   --chart-1: 210 80% 50%;
-  --chart-2: 25 85% 55%;
+  --chart-2: 220 73% 45%;
   --chart-3: 145 70% 45%;
   --chart-4: 220 25% 15%;
   --chart-5: 260 70% 60%;
@@ -72,7 +72,7 @@
   --shadow-2xl: 0px 2px 0px 0px hsl(220 10% 85% / 0.50);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
-  --orange-gradient: linear-gradient(90deg, #e67e22, #d97506);
+  --blue-gradient: linear-gradient(90deg, #163791, #0f2a6b);
   --sidebar-primary-border: hsl(var(--sidebar-primary));
   --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
   --sidebar-accent-border: hsl(var(--sidebar-accent));
@@ -112,8 +112,8 @@
   --popover: 220 25% 14%;
   --popover-foreground: 220 15% 85%;
   --popover-border: 220 15% 22%;
-  --primary: 262 83% 65%;
-  --primary-foreground: 210 100% 95%;
+  --primary: 220 73% 33%;
+  --primary-foreground: 0 0% 100%;
   --secondary: 220 20% 18%;
   --secondary-foreground: 220 15% 75%;
   --muted: 220 15% 16%;
@@ -123,9 +123,9 @@
   --destructive: 0 85% 60%;
   --destructive-foreground: 0 100% 95%;
   --input: 220 15% 25%;
-  --ring: 210 80% 50%;
+  --ring: 220 73% 33%;
   --chart-1: 210 80% 60%;
-  --chart-2: 25 85% 65%;
+  --chart-2: 220 73% 55%;
   --chart-3: 145 70% 55%;
   --chart-4: 220 15% 75%;
   --chart-5: 260 70% 70%;

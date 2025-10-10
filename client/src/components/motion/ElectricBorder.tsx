@@ -1,7 +1,7 @@
 import React, { useId } from "react";
 
 interface ElectricBorderProps {
-  color?: string; // CSS color, e.g. 'hsl(28 92% 56%)' or '#ff9900'
+  color?: string; // CSS color, e.g. 'hsl(220 73% 33%)' or '#163791'
   radius?: number; // px radius
   strokeWidth?: number; // px border width
   className?: string; // additional classes for the container

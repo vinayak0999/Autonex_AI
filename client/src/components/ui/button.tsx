@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         // Primary: orange gradient pill
         default:
-          "text-white border border-transparent bg-[linear-gradient(180deg,hsl(28_92%_62%)_0%,hsl(28_92%_46%)_100%)] shadow-md hover:shadow-lg hover:brightness-110",
+          "text-white border border-transparent bg-[linear-gradient(180deg,hsl(220_73%_43%)_0%,hsl(220_73%_23%)_100%)] shadow-md hover:shadow-lg hover:brightness-110",
         destructive:
           "bg-destructive text-destructive-foreground border border-destructive-border",
         // Secondary: transparent outlined pill

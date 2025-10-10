@@ -121,8 +121,8 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
         // Draw trail
         if (particle.trail.length > 1) {
           ctx.strokeStyle = particle.type === 'electron' 
-            ? `rgba(255, 165, 0, ${0.3})` 
-            : `rgba(255, 140, 0, ${0.3})`;
+            ? `rgba(22, 55, 145, ${0.3})` 
+            : `rgba(15, 42, 107, ${0.3})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(particle.trail[0].x, particle.trail[0].y);
@@ -139,11 +139,11 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
         );
         
         if (particle.type === 'electron') {
-          gradient.addColorStop(0, 'rgba(255, 165, 0, 0.8)');
-          gradient.addColorStop(1, 'rgba(255, 165, 0, 0)');
+          gradient.addColorStop(0, 'rgba(22, 55, 145, 0.8)');
+          gradient.addColorStop(1, 'rgba(22, 55, 145, 0)');
         } else {
-          gradient.addColorStop(0, 'rgba(255, 140, 0, 0.8)');
-          gradient.addColorStop(1, 'rgba(255, 140, 0, 0)');
+          gradient.addColorStop(0, 'rgba(15, 42, 107, 0.8)');
+          gradient.addColorStop(1, 'rgba(15, 42, 107, 0)');
         }
         
         ctx.fillStyle = gradient;
@@ -152,7 +152,7 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
         ctx.fill();
 
         // Draw core
-        ctx.fillStyle = particle.type === 'electron' ? '#ffa500' : '#ff8c00';
+        ctx.fillStyle = particle.type === 'electron' ? '#163791' : '#0f2a6b';
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
         ctx.fill();
@@ -223,13 +223,13 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
         <div className="relative w-full min-h-[50vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0"
             style={{
-              background: "linear-gradient(180deg, transparent 0%, hsl(var(--background)/0.1) 15%, hsl(var(--card)/0.2) 30%, hsl(25, 85%, 55%, 0.15) 50%, hsl(25, 85%, 55%, 0.3) 75%, hsl(25, 85%, 55%, 0.5) 100%)"
+              background: "linear-gradient(180deg, transparent 0%, hsl(var(--background)/0.1) 15%, hsl(var(--card)/0.2) 30%, hsl(220, 73%, 33%, 0.15) 50%, hsl(220, 73%, 33%, 0.3) 75%, hsl(220, 73%, 33%, 0.5) 100%)"
             }}
           />
           {/* subtle texture overlay */}
           <div className="pointer-events-none absolute inset-0"
             style={{ 
-              background: "linear-gradient(45deg, transparent 0%, hsl(25, 85%, 55%, 0.05) 50%, transparent 100%)",
+              background: "linear-gradient(45deg, transparent 0%, hsl(220, 73%, 33%, 0.05) 50%, transparent 100%)",
               maskImage: "linear-gradient(to bottom, transparent 0%, black 20%, black 100%)"
             }}
           />
@@ -237,7 +237,7 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
           <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-hsl(var(--background)) to-transparent" />
           
           {/* bottom inner glow */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-[radial-gradient(60%_100%_at_50%_100%,hsl(25, 85%, 55%, 0.15),transparent_70%)]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-[radial-gradient(60%_100%_at_50%_100%,hsl(220, 73%, 33%, 0.15),transparent_70%)]" />
 
           {/* Content wrapped in bordered-black container */}
           <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
@@ -250,9 +250,9 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
               {/* Hero-style badge */}
               <div className="mb-4" onClick={goToContact}>
                 <div className="relative inline-flex items-center justify-center p-0.5 overflow-hidden rounded-full">
-                  <div className="absolute top-1/2 left-1/2 w-[200%] h-[400%]" style={{ background: 'conic-gradient(from 0deg at 50% 50%, hsl(25, 85%, 55%, 0.5), hsl(25, 85%, 55%, 0), hsl(25, 85%, 55%, 0.5))', animation: 'rotateAurora 4s linear infinite' }} />
+                  <div className="absolute top-1/2 left-1/2 w-[200%] h-[400%]" style={{ background: 'conic-gradient(from 0deg at 50% 50%, hsl(220, 73%, 33%, 0.5), hsl(220, 73%, 33%, 0), hsl(220, 73%, 33%, 0.5))', animation: 'rotateAurora 4s linear infinite' }} />
                   <div className="relative flex items-center px-6 py-3 rounded-full bg-zinc-900/70 backdrop-blur-sm">
-                    <Sparkles className="w-4 h-4 mr-2" style={{ color: 'hsl(25, 85%, 55%)' }} />
+                    <Sparkles className="w-4 h-4 mr-2" style={{ color: 'hsl(220, 73%, 33%)' }} />
                     <span className="text-sm font-semibold tracking-wider uppercase text-white">{primaryLabel}</span>
                   </div>
                 </div>
