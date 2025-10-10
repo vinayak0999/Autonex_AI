@@ -11,11 +11,7 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const goToContact = () => {
-    if (window.location.pathname === "/") {
-      const el = document.getElementById("contact");
-      if (el) { el.scrollIntoView({ behavior: "smooth" }); return; }
-    }
-    window.location.href = "/#contact";
+    window.location.href = "/contact";
   };
 
   const bookACall = () => {
@@ -252,7 +248,7 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
               <p className="text-lg md:text-xl text-white/80 mb-8 max-w-3xl mx-auto">{subtitleText}</p>
 
               {/* Hero-style badge */}
-              <div className="mb-4" onClick={() => (window.location.href = "/contact")}>
+              <div className="mb-4" onClick={goToContact}>
                 <div className="relative inline-flex items-center justify-center p-0.5 overflow-hidden rounded-full">
                   <div className="absolute top-1/2 left-1/2 w-[200%] h-[400%]" style={{ background: 'conic-gradient(from 0deg at 50% 50%, hsl(25, 85%, 55%, 0.5), hsl(25, 85%, 55%, 0), hsl(25, 85%, 55%, 0.5))', animation: 'rotateAurora 4s linear infinite' }} />
                   <div className="relative flex items-center px-6 py-3 rounded-full bg-zinc-900/70 backdrop-blur-sm">
@@ -300,7 +296,7 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
                   <button className="block px-1 py-0.5 hover:text-foreground transition-colors" onClick={() => handleNavClick('vision')}>Our Vision</button>
                   <button className="block px-1 py-0.5 hover:text-foreground transition-colors" onClick={() => handleNavClick('services')}>Services</button>
                   <button className="block px-1 py-0.5 hover:text-foreground transition-colors" onClick={() => handleNavClick('industries')}>Industries</button>
-                  <button className="block px-1 py-0.5 hover:text-foreground transition-colors" onClick={() => handleNavClick('contact')}>Contact</button>
+                  <button className="block px-1 py-0.5 hover:text-foreground transition-colors" onClick={goToContact}>Contact</button>
                 </div>
                 {/* Right: Legal (vertical) */}
                 <div className="space-y-1.5 text-right">
@@ -326,7 +322,7 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
                 <button className="hover:text-foreground transition-colors" onClick={() => handleNavClick('vision')}>Our Vision</button>
                 <button className="hover:text-foreground transition-colors" onClick={() => handleNavClick('services')}>Services</button>
                 <button className="hover:text-foreground transition-colors" onClick={() => handleNavClick('industries')}>Industries</button>
-                <button className="hover:text-foreground transition-colors" onClick={() => handleNavClick('contact')}>Contact</button>
+                <button className="hover:text-foreground transition-colors" onClick={goToContact}>Contact</button>
               </div>
 
               {/* Right: Legal */}
