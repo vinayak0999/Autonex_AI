@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoImage from './7.png'; // Make sure your logo is in the same folder
 
 interface PreloaderProps {
   durationMs?: number;

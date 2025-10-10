@@ -4,7 +4,7 @@ import { Section, SectionHeader } from "./motion/Section";
 import { StaggerChildren, SlideIn, serviceCardVariants, serviceCardHover } from "./motion/Motion";
 import MagneticExplode from "./motion/MagneticExplode";
 import { motion } from "framer-motion";
-import dashboardMockupPath from "@assets/generated_images/Industrial_monitoring_dashboard_mockup_02e09966.png";
+import dashboardMockupPath from "@assets/generated_images/new graph.png";
 
 const services = [
   {
