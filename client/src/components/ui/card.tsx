@@ -10,8 +10,8 @@ const sweepVariants: Variants = {
 };
 
 const cardVariants: Variants = {
-  rest: { y: 0, scale: 1, boxShadow: "0 1px 3px rgba(0,0,0,.15)" },
-  hover: { y: -6, scale: 1.02, boxShadow: "0 10px 40px rgba(0,0,0,.35)" },
+  rest: { y: 0, scale: 1, boxShadow: "0 1px 3px rgba(0, 0, 0, 0.15)" },
+  hover: { y: -6, scale: 1.02, boxShadow: "0 10px 40px rgba(0, 0, 0, 0.35)" },
 };
 
 
@@ -46,7 +46,7 @@ const Card = React.forwardRef<
       <motion.span
         variants={sweepVariants}
         className="pointer-events-none absolute inset-0 z-20"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent)" }}
+        style={{ background: "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent)" }}
       />
     )}
   </motion.div>

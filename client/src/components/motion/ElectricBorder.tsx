@@ -10,7 +10,7 @@ interface ElectricBorderProps {
 // Renders an animated electric/plasma border using an SVG turbulence + displacement filter
 // and layered glows. It mounts absolutely over its parent.
 export default function ElectricBorder({
-  color = "#e5a34f",
+  color = "#163791",
   radius = 16,
   strokeWidth = 2,
   className,
@@ -85,7 +85,7 @@ export default function ElectricBorder({
           position: "absolute",
           inset: 0,
           borderRadius: radius,
-          border: `${strokeWidth}px solid rgba(221,132,72,0.6)`,
+          border: `${strokeWidth}px solid rgba(22,55,145,0.6)`,
           filter: "blur(1px)",
         }}
       />

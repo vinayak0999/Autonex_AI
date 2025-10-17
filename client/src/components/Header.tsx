@@ -86,22 +86,22 @@ export default function Header() {
               <nav className="flex-1 overflow-y-auto p-8 pt-10 pr-12 pl-32 md:pl-40 lg:pl-44">
                 <ul className="space-y-3">
                   <li className="ml-0 md:ml-2">
-                    <Button variant="ghost" className="justify-start w-full text-lg orange-hover" onClick={() => handleNavClick("home")}>
+                    <Button variant="ghost" className="justify-start w-full text-lg blue-hover" onClick={() => handleNavClick("home")}>
                       Home
                     </Button>
                   </li>
                   <li className="ml-6 md:ml-8">
-                    <Button variant="ghost" className="justify-start w-full text-lg orange-hover" onClick={() => goToTopAndClose("/products")}>
+                    <Button variant="ghost" className="justify-start w-full text-lg blue-hover" onClick={() => goToTopAndClose("/products")}>
                       Products
                     </Button>
                   </li>
                   <li className="ml-10 md:ml-14">
-                    <Button variant="ghost" className="justify-start w-full text-lg orange-hover" onClick={() => goToTopAndClose("/data-services")}>
+                    <Button variant="ghost" className="justify-start w-full text-lg blue-hover" onClick={() => goToTopAndClose("/data-services")}>
                       Data Services
                     </Button>
                   </li>
                   <li className="ml-14 md:ml-20">
-                    <Button variant="ghost" className="justify-start w-full text-lg orange-hover" onClick={() => goToTopAndClose("/about")}>
+                    <Button variant="ghost" className="justify-start w-full text-lg blue-hover" onClick={() => goToTopAndClose("/about")}>
                       About
                     </Button>
                   </li>
@@ -111,10 +111,10 @@ export default function Header() {
             </div>
           </div>
 
-          {/* keyframes for slide in and orange hover styles */}
+          {/* keyframes for slide in and blue hover styles */}
           <style>{`
             @keyframes menuSlideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
-            .orange-hover:hover {
+            .blue-hover:hover {
               background-color: rgba(255,255,255,0.08) !important; /* greyish/whitish hover */
               color: #ffffff !important; /* whitish text */
             }

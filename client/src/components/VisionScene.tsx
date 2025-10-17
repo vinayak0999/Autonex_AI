@@ -112,7 +112,7 @@ const visionCards = [
     title: "Predictive Intelligence",
     description:
       "Predict failures before they happen and eliminate blind spots across machines and processes.",
-    gradient: "from-amber-500/20 to-orange-500/20",
+    gradient: "from-blue-500/20 to-indigo-500/20",
   },
   {
     icon: Zap,

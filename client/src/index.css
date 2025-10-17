@@ -19,11 +19,11 @@
 }
 /* Base palette (dark, warm) */
 :root {
-  --button-outline: rgba(0,0,0, .10);
-  --badge-outline: rgba(0,0,0, .05);
+  --button-outline: rgba(0, 0, 0, 0.1);
+  --badge-outline: rgba(0, 0, 0, 0.05);
   --opaque-button-border-intensity: -8; /* In terms of percentages */
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
+  --elevate-1: rgba(0, 0, 0, 0.03);
+  --elevate-2: rgba(0, 0, 0, 0.08);
   --background: 24 22% 8%; /* ~#1a1410 */
   --foreground: 0 0% 96%; /* off-white */
   --border: 24 15% 18%;
@@ -41,7 +41,7 @@
   --popover: 24 22% 9%;
   --popover-foreground: 0 0% 96%;
   --popover-border: 24 15% 18%;
-  --primary: 220 73% 33%;
+  --primary: 220 73% 33%; /* #163791 - Blue theme */
   --primary-foreground: 0 0% 100%;
   --secondary: 24 20% 16%;
   --secondary-foreground: 0 0% 92%;
@@ -90,11 +90,11 @@
 }
 
 .dark {
-  --button-outline: rgba(255,255,255, .10);
-  --badge-outline: rgba(255,255,255, .05);
+  --button-outline: rgba(255, 255, 255, 0.1);
+  --badge-outline: rgba(255, 255, 255, 0.05);
   --opaque-button-border-intensity: 9;
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .09);
+  --elevate-1: rgba(255, 255, 255, 0.04);
+  --elevate-2: rgba(255, 255, 255, 0.274);
   --background: 222 47% 5%;
   --foreground: 220 15% 85%;
   --border: 220 15% 15%;
@@ -112,7 +112,7 @@
   --popover: 220 25% 14%;
   --popover-foreground: 220 15% 85%;
   --popover-border: 220 15% 22%;
-  --primary: 220 73% 33%;
+  --primary: 220 73% 33%; /* #163791 - Blue theme */
   --primary-foreground: 0 0% 100%;
   --secondary: 220 20% 18%;
   --secondary-foreground: 220 15% 75%;

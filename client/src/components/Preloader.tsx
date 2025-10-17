@@ -102,7 +102,7 @@ export default function Preloader({ durationMs = 2000 }: PreloaderProps) {
           const alpha = Math.max(0, (1 - p) * 0.12 * (1 - elapsed / maxMs));
           if (alpha <= 0.001) continue;
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(255,140,20,${alpha.toFixed(3)})`;
+          ctx.strokeStyle = `rgba(22,55,145,${alpha.toFixed(3)})`;
           ctx.lineWidth = 1.2 * dpr;
           const angle = (elapsed * 0.01 + i * 0.4);
           ctx.arc(cx, cy, r, angle, angle + Math.PI * 1.2);

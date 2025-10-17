@@ -187,7 +187,7 @@ function updateAndDrawParticles(ctx: CanvasRenderingContext2D, p: Particle[], el
   ctx.globalCompositeOperation = "lighter";
   for (const pt of p) {
     const alpha = 0.65 * pt.life;
-    ctx.fillStyle = `rgba(255,140,0,${alpha})`;
+    ctx.fillStyle = `rgba(22,55,145,${alpha})`;
     ctx.beginPath();
     ctx.arc(pt.x, pt.y, pt.size, 0, Math.PI * 2);
     ctx.fill();
@@ -212,7 +212,7 @@ function drawRings(ctx: CanvasRenderingContext2D, elapsedMs: number) {
   const cy = ctx.canvas.clientHeight / 2;
   const t = elapsedMs / 1000;
   ctx.save();
-  ctx.strokeStyle = "rgba(255,160,40,0.15)";
+  ctx.strokeStyle = "rgba(22,55,145,0.15)";
   ctx.lineWidth = 1;
   for (let i = 0; i < 3; i++) {
     const r = 40 + i * 18 + Math.sin(t + i) * 2;

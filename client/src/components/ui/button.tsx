@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary: orange gradient pill
+        // Primary: blue gradient pill
         default:
           "text-white border border-transparent bg-[linear-gradient(180deg,hsl(220_73%_43%)_0%,hsl(220_73%_23%)_100%)] shadow-md hover:shadow-lg hover:brightness-110",
         destructive:
