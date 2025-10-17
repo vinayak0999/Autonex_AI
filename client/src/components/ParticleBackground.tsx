@@ -17,6 +17,7 @@ export const ParticleBackground = () => {
     let lastFrameTime = 0;
     const isMobile = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
     let primaryColorHsl = '28 92% 56%';
+    let running = true;
 
     const updateColor = () => {
       try {
@@ -52,21 +53,24 @@ export const ParticleBackground = () => {
       const dpr = window.devicePixelRatio || 1;
       // Cap DPR on mobile to reduce fill cost
       const effectiveDpr = isMobile ? Math.min(1.5, dpr) : dpr;
-      canvas.width = window.innerWidth * effectiveDpr;
-      canvas.height = document.body.scrollHeight * effectiveDpr;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${document.body.scrollHeight}px`;
+      // Viewport-only canvas; fixed background does not need full page height
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      canvas.width = vw * effectiveDpr;
+      canvas.height = vh * effectiveDpr;
+      canvas.style.width = `${vw}px`;
+      canvas.style.height = `${vh}px`;
       context.setTransform(1, 0, 0, 1, 0, 0);
       context.scale(effectiveDpr, effectiveDpr);
 
       particles = [];
       
       // --- CHANGE #2: Parameters tuned for MORE visibility and presence ---
-      const width = window.innerWidth;
-      const height = document.body.scrollHeight;
+      const width = vw;
+      const height = vh;
       // Reduce density on mobile while keeping visual richness
-      const densityDivisor = isMobile ? 60000 : 25000;
-      const numberOfParticles = Math.min(2200, Math.floor((width * height) / densityDivisor));
+      const densityDivisor = isMobile ? 60000 : 30000;
+      const numberOfParticles = Math.min(isMobile ? 500 : 1200, Math.floor((width * height) / densityDivisor));
       for (let i = 0; i < numberOfParticles; i++) {
         const size = Math.random() * 1.5 + 0.5; // Larger particles
         const x = Math.random() * width;
@@ -81,8 +85,9 @@ export const ParticleBackground = () => {
       if (!particles) return;
       // On mobile, skip expensive O(n^2) linking to prevent jank
       if (isMobile) return;
-      for (let a = 0; a < particles.length; a += 2) {
-        for (let b = a + 1; b < particles.length; b += 2) {
+      // Sample pairs to reduce complexity
+      for (let a = 0; a < particles.length; a += 3) {
+        for (let b = a + 3; b < particles.length; b += 3) {
           const dx = particles[a].x - particles[b].x;
           const dy = particles[a].y - particles[b].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
@@ -100,7 +105,7 @@ export const ParticleBackground = () => {
     };
 
     const animate = (ts?: number) => {
-      if (!particles) return;
+      if (!particles || !running) return;
       // Throttle to ~30fps on mobile
       if (isMobile && ts !== undefined) {
         if (ts - lastFrameTime < 33) {
@@ -126,7 +131,16 @@ export const ParticleBackground = () => {
     animate();
 
     const handleResize = () => { init(); };
+    const handleVisibility = () => {
+      running = document.visibilityState === 'visible';
+      if (running) {
+        // reset lastFrameTime to avoid burst
+        lastFrameTime = 0;
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
     window.addEventListener('resize', handleResize);
+    document.addEventListener('visibilitychange', handleVisibility);
     
     const observer = new MutationObserver(handleResize);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style'] });
@@ -134,6 +148,7 @@ export const ParticleBackground = () => {
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibility);
       observer.disconnect();
     };
   }, []);

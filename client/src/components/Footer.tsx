@@ -169,7 +169,9 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
       });
     };
 
+    let running = true;
     const animate = (ts?: number) => {
+      if (!running) { animationFrameId = requestAnimationFrame(animate); return; }
       // Throttle to ~30fps on mobile
       if (isMobile && ts !== undefined) {
         if (ts - lastFrameTime < 33) {
@@ -189,12 +191,20 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
     const handleResize = () => {
       initParticles();
     };
+    const handleVisibility = () => {
+      running = document.visibilityState === 'visible';
+      if (running) {
+        lastFrameTime = 0;
+      }
+    };
 
     window.addEventListener('resize', handleResize);
+    document.addEventListener('visibilitychange', handleVisibility);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, []);
 
