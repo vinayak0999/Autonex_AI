@@ -10,9 +10,12 @@ export const ParticleBackground = () => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+    const context = ctx as CanvasRenderingContext2D;
     
     let animationFrameId: number;
     let particles: Particle[];
+    let lastFrameTime = 0;
+    const isMobile = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
     let primaryColorHsl = '28 92% 56%';
 
     const updateColor = () => {
@@ -37,28 +40,33 @@ export const ParticleBackground = () => {
       }
       draw() {
         // --- CHANGE #1: Made particles fully opaque for better visibility ---
-        ctx.fillStyle = `hsl(${primaryColorHsl} / 1.0)`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        context.fillStyle = `hsl(${primaryColorHsl} / 1.0)`;
+        context.beginPath();
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        context.fill();
       }
     }
 
     const init = () => {
       updateColor();
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = document.body.scrollHeight * dpr;
+      // Cap DPR on mobile to reduce fill cost
+      const effectiveDpr = isMobile ? Math.min(1.5, dpr) : dpr;
+      canvas.width = window.innerWidth * effectiveDpr;
+      canvas.height = document.body.scrollHeight * effectiveDpr;
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${document.body.scrollHeight}px`;
-      ctx.scale(dpr, dpr);
+      context.setTransform(1, 0, 0, 1, 0, 0);
+      context.scale(effectiveDpr, effectiveDpr);
 
       particles = [];
       
       // --- CHANGE #2: Parameters tuned for MORE visibility and presence ---
       const width = window.innerWidth;
       const height = document.body.scrollHeight;
-      const numberOfParticles = Math.floor((width * height) / 25000); // More particles than before
+      // Reduce density on mobile while keeping visual richness
+      const densityDivisor = isMobile ? 60000 : 25000;
+      const numberOfParticles = Math.min(2200, Math.floor((width * height) / densityDivisor));
       for (let i = 0; i < numberOfParticles; i++) {
         const size = Math.random() * 1.5 + 0.5; // Larger particles
         const x = Math.random() * width;
@@ -71,32 +79,43 @@ export const ParticleBackground = () => {
 
     const connect = () => {
       if (!particles) return;
-      for (let a = 0; a < particles.length; a++) {
-        for (let b = a; b < particles.length; b++) {
+      // On mobile, skip expensive O(n^2) linking to prevent jank
+      if (isMobile) return;
+      for (let a = 0; a < particles.length; a += 2) {
+        for (let b = a + 1; b < particles.length; b += 2) {
           const dx = particles[a].x - particles[b].x;
           const dy = particles[a].y - particles[b].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
           if (distance < 100) {
             const opacity = 1 - (distance / 100);
-            ctx.strokeStyle = `hsl(${primaryColorHsl} / ${opacity})`;
-            ctx.lineWidth = 0.3; // Thicker lines for more visibility
-            ctx.beginPath();
-            ctx.moveTo(particles[a].x, particles[a].y);
-            ctx.lineTo(particles[b].x, particles[b].y);
-            ctx.stroke();
+            context.strokeStyle = `hsl(${primaryColorHsl} / ${opacity})`;
+            context.lineWidth = 0.3; // Thicker lines for more visibility
+            context.beginPath();
+            context.moveTo(particles[a].x, particles[a].y);
+            context.lineTo(particles[b].x, particles[b].y);
+            context.stroke();
           }
         }
       }
     };
 
-    const animate = () => {
+    const animate = (ts?: number) => {
       if (!particles) return;
-      
+      // Throttle to ~30fps on mobile
+      if (isMobile && ts !== undefined) {
+        if (ts - lastFrameTime < 33) {
+          animationFrameId = requestAnimationFrame(animate);
+          return;
+        }
+        lastFrameTime = ts;
+      }
+
       // --- CHANGE #3: Add a solid black background on every frame ---
       // We use canvas.width/height because fillRect is not affected by the scale transform
       // This ensures a high-contrast background for the particles at all times.
-      ctx.fillStyle = '#09090b'; // A very dark gray, matching theme
-      ctx.fillRect(0, 0, canvas.width, canvas.height); 
+      // Non-null: context established above
+      context.fillStyle = '#09090b'; // A very dark gray, matching theme
+      context.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach(p => { p.update(); p.draw(); });
       connect();

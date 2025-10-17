@@ -64,6 +64,9 @@ export default function ServicesScene() {
                 src={dashboardMockupPath}
                 alt="Live Production Line Monitoring Dashboard"
                 className="w-full h-auto"
+                loading="lazy"
+                decoding="async"
+                fetchPriority="low"
                 data-testid="img-dashboard"
               />
               {/* Overlay removed hover reaction */}

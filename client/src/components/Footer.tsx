@@ -38,6 +38,7 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
     if (!ctx) return;
 
     let animationFrameId: number;
+    let lastFrameTime = 0;
     let particles: Array<{
       x: number;
       y: number;
@@ -49,13 +50,22 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
       trail: Array<{x: number, y: number}>;
     }> = [];
 
+    const isMobile = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+
     const initParticles = () => {
       const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
+      const dpr = window.devicePixelRatio || 1;
+      const effectiveDpr = isMobile ? Math.min(1.5, dpr) : dpr;
+      canvas.width = Math.floor(rect.width * effectiveDpr);
+      canvas.height = Math.floor(rect.height * effectiveDpr);
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(effectiveDpr, effectiveDpr);
       
       particles = [];
-      const particleCount = Math.floor((rect.width * rect.height) / 15000);
+      const densityDivisor = isMobile ? 30000 : 15000;
+      const particleCount = Math.min(600, Math.floor((rect.width * rect.height) / densityDivisor));
       
       for (let i = 0; i < particleCount; i++) {
         const type = Math.random() > 0.5 ? 'electron' : 'proton';
@@ -90,23 +100,23 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
         particle.trail.push({ x: particle.x, y: particle.y });
         if (particle.trail.length > 8) particle.trail.shift();
 
-        // Apply electromagnetic forces
-        particles.forEach(other => {
-          if (particle === other) return;
-          
-          const dx = other.x - particle.x;
-          const dy = other.y - particle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance > 0 && distance < 100) {
-            const force = (particle.charge * other.charge) / (distance * distance) * 0.001;
-            const fx = (dx / distance) * force;
-            const fy = (dy / distance) * force;
-            
-            particle.vx += fx;
-            particle.vy += fy;
+        // Apply electromagnetic forces (skip on mobile to avoid O(n^2))
+        if (!isMobile) {
+          for (let i = 0; i < particles.length; i += 2) {
+            const other = particles[i];
+            if (particle === other) continue;
+            const dx = other.x - particle.x;
+            const dy = other.y - particle.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance > 0 && distance < 100) {
+              const force = (particle.charge * other.charge) / (distance * distance) * 0.001;
+              const fx = (dx / distance) * force;
+              const fy = (dy / distance) * force;
+              particle.vx += fx;
+              particle.vy += fy;
+            }
           }
-        });
+        }
 
         // Damping
         particle.vx *= 0.99;
@@ -159,7 +169,15 @@ export default function Footer({ hideCta = false }: { hideCta?: boolean }) {
       });
     };
 
-    const animate = () => {
+    const animate = (ts?: number) => {
+      // Throttle to ~30fps on mobile
+      if (isMobile && ts !== undefined) {
+        if (ts - lastFrameTime < 33) {
+          animationFrameId = requestAnimationFrame(animate);
+          return;
+        }
+        lastFrameTime = ts;
+      }
       updateParticles();
       drawParticles();
       animationFrameId = requestAnimationFrame(animate);
